@@ -28,10 +28,17 @@ protocol KVCycleViewDelegate : class {
     func cycleView(_ cycleView:KVCycleView, _ index: Int) -> imageModel
     
     //optional
+    //点击图片的回调
     func cycleView(_ cycleView:KVCycleView, didSelected index:Int)
+    //图片显示之后的回调
     func cycleView(_ cycleView:KVCycleView, didShow index:Int)
+    //滚动的时间间隔
     func cycleView(timeInterval cycleView:KVCycleView) -> Double
+    //默认图
     func cycleView(placeholder cycleView:KVCycleView) -> UIImage?
+    //页码控制器的高度  ****** 返回0时隐藏page
+    func cycleView(pageControlHeight cycleView:KVCycleView) -> Double
+    
 }
 
 
@@ -50,6 +57,9 @@ extension KVCycleViewDelegate {
         return UIImage(named: "")
     }
     
+    func cycleView(pageControlHeight cycleView:KVCycleView) -> Double{
+        return Double(cycleView.bounds.size.height) * 0.1
+    }
     
 }
 
@@ -85,8 +95,8 @@ class KVCycleView: UIView ,UIScrollViewDelegate{
         return nextImageView
     }()
     fileprivate lazy var pageControl : UIPageControl! = {
-        let pageControl = UIPageControl(frame: CGRect(x: 0, y: self.bounds.size.height * (1 - 0.1), width: self.bounds.size.width, height: self.bounds.size.height * 0.1))
-        pageControl.backgroundColor = UIColor.gray
+        let pageControl = UIPageControl()
+        pageControl.backgroundColor = UIColor.orange
         return pageControl
     }()
     
@@ -214,7 +224,7 @@ class KVCycleView: UIView ,UIScrollViewDelegate{
     
 }
 
-extension CycleView {
+extension KVCycleView {
     
     
     //开始拖拽
@@ -253,6 +263,9 @@ extension CycleView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        pageControl.isHidden = delegate?.cycleView(pageControlHeight: self) == 0
+        pageControl.frame = CGRect(x: 0, y: Double(self.bounds.size.height) - (delegate?.cycleView(pageControlHeight: self) ?? 0), width: Double(self.bounds.size.width), height: delegate?.cycleView(pageControlHeight: self) ?? 0)
         contentScrollView.setContentOffset(CGPoint(x:self.bounds.size.width,y: 0), animated: false)
     }
     
