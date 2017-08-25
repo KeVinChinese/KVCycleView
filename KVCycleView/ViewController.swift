@@ -16,19 +16,16 @@ class ViewController: UIViewController,KVCycleViewDelegate {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         
-        cycleView = KVCycleView(frame: CGRect(x: 0, y: 100, width: self.view.bounds.size.width, height: 200))
+        cycleView = KVCycleView(frame: self.view.bounds)
         cycleView.delegate = self
         self.view.addSubview(cycleView)
         
     }
     
-    let images : [String] = ["5F" ,"cfl","hsz"]
+    //let images : [String] = ["5F" ,"cfl","hsz"]
 
-//    let images : [String] = [
-//        "http://v1.qzone.cc/avatar/201409/24/19/58/5422b1ff86ed0232.jpg%21200x200.jpg" ,
-//        "http://img2.100bt.com/upload/ttq/20131103/1383470553132_middle.jpg",
-//        "http://img0.imgtn.bdimg.com/it/u=4128355576,3453965016&fm=214&gp=0.jpg"
-//    ]
+    let images : [String] = [
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1503656961114&di=4b4f9880f04e0aba483d5b6cd8ee472a&imgtype=0&src=http%3A%2F%2Fpic7.nipic.com%2F20100609%2F3017209_220213550272_2.jpg" ,"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1503656961114&di=466a7b00e922de834238b45535891949&imgtype=0&src=http%3A%2F%2Fimg0.ph.126.net%2FwzDDf46xdC37iq4sPeccLg%3D%3D%2F3311834576078039103.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1503656961114&di=7861e456963dcfecbe6df6eaba759447&imgtype=0&src=http%3A%2F%2Fpic29.nipic.com%2F20130531%2F7447430_194454520000_2.jpg"]
     
     
     func cycleView(index cycleView: KVCycleView) -> Int {
@@ -49,6 +46,9 @@ class ViewController: UIViewController,KVCycleViewDelegate {
         return 3
     }
     
+    func cycleView(pageControlHeight cycleView: KVCycleView) -> Double {
+        return 40
+    }
     
 }
 
