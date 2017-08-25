@@ -14,6 +14,7 @@
 		0A59F0D31F4595D4006E25CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A59F0D11F4595D4006E25CF /* LaunchScreen.storyboard */; };
 		0A59F0DE1F4595D4006E25CF /* KVCycleViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59F0DD1F4595D4006E25CF /* KVCycleViewUITests.swift */; };
 		0A59F0E91F459662006E25CF /* KVCycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A59F0E81F459662006E25CF /* KVCycleView.swift */; };
+		1D00F3F629616CBF77A26FEB /* Pods_KVCycleView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B14AE48826C866FF5F518BB /* Pods_KVCycleView.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,9 @@
 		0A59F0DD1F4595D4006E25CF /* KVCycleViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVCycleViewUITests.swift; sourceTree = "<group>"; };
 		0A59F0DF1F4595D4006E25CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A59F0E81F459662006E25CF /* KVCycleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVCycleView.swift; sourceTree = "<group>"; };
+		3147458CBFE15DDA8A093A19 /* Pods-KVCycleView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KVCycleView.release.xcconfig"; path = "Pods/Target Support Files/Pods-KVCycleView/Pods-KVCycleView.release.xcconfig"; sourceTree = "<group>"; };
+		5B14AE48826C866FF5F518BB /* Pods_KVCycleView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KVCycleView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C3300755E1E7499DCC8DDF8 /* Pods-KVCycleView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KVCycleView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KVCycleView/Pods-KVCycleView.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D00F3F629616CBF77A26FEB /* Pods_KVCycleView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +69,8 @@
 				0A59F0C71F4595D4006E25CF /* KVCycleView */,
 				0A59F0DC1F4595D4006E25CF /* KVCycleViewUITests */,
 				0A59F0C61F4595D4006E25CF /* Products */,
+				A71FB1D8285A3CD5428BBD85 /* Pods */,
+				FDB310947189987B621408B2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +106,23 @@
 			path = KVCycleViewUITests;
 			sourceTree = "<group>";
 		};
+		A71FB1D8285A3CD5428BBD85 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7C3300755E1E7499DCC8DDF8 /* Pods-KVCycleView.debug.xcconfig */,
+				3147458CBFE15DDA8A093A19 /* Pods-KVCycleView.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FDB310947189987B621408B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5B14AE48826C866FF5F518BB /* Pods_KVCycleView.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,9 +130,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A59F0E21F4595D4006E25CF /* Build configuration list for PBXNativeTarget "KVCycleView" */;
 			buildPhases = (
+				D18FA89D723BCE5013B020D3 /* [CP] Check Pods Manifest.lock */,
 				0A59F0C11F4595D4006E25CF /* Sources */,
 				0A59F0C21F4595D4006E25CF /* Frameworks */,
 				0A59F0C31F4595D4006E25CF /* Resources */,
+				10F481E8787A4D07EB9FB72C /* [CP] Embed Pods Frameworks */,
+				A28BC2C433D4855B5ED9FF83 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -196,6 +223,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		10F481E8787A4D07EB9FB72C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KVCycleView/Pods-KVCycleView-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A28BC2C433D4855B5ED9FF83 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KVCycleView/Pods-KVCycleView-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D18FA89D723BCE5013B020D3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0A59F0C11F4595D4006E25CF /* Sources */ = {
@@ -341,6 +416,7 @@
 		};
 		0A59F0E31F4595D4006E25CF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C3300755E1E7499DCC8DDF8 /* Pods-KVCycleView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = KVCycleView/Info.plist;
@@ -353,6 +429,7 @@
 		};
 		0A59F0E41F4595D4006E25CF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3147458CBFE15DDA8A093A19 /* Pods-KVCycleView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = KVCycleView/Info.plist;

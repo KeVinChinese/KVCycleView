@@ -10,22 +10,16 @@
 //****** 出现拖拽位置改变的状态,请在控制器的viewDidLoad 中添加self.automaticallyAdjustsScrollViewInsets = false
 //或者放在viewDidAppear中
 
+//******
+
+
 import UIKit
+import Kingfisher
 
-enum imageStringType {
-    case url
-    case local
-}
-
-struct imageModel {
-    var name : String?
-    var type : imageStringType?
-}
- 
 protocol KVCycleViewDelegate : class {
     func cycleView(index cycleView:KVCycleView) -> Int
     
-    func cycleView(_ cycleView:KVCycleView, _ index: Int) -> imageModel
+    func cycleView(_ cycleView:KVCycleView, _ index: Int) -> String?
     
     //optional
     //点击图片的回调
@@ -36,8 +30,15 @@ protocol KVCycleViewDelegate : class {
     func cycleView(timeInterval cycleView:KVCycleView) -> Double
     //默认图
     func cycleView(placeholder cycleView:KVCycleView) -> UIImage?
+    
+    
+    //MARK:- 设置页码控制器
     //页码控制器的高度  ****** 返回0时隐藏page
     func cycleView(pageControlHeight cycleView:KVCycleView) -> Double
+    //页码控制器的背景颜色
+    func cycleView(pageControlBackgroundColor cycleView:KVCycleView) -> UIColor
+    
+    
     
 }
 
@@ -59,6 +60,10 @@ extension KVCycleViewDelegate {
     
     func cycleView(pageControlHeight cycleView:KVCycleView) -> Double{
         return Double(cycleView.bounds.size.height) * 0.1
+    }
+    
+    func cycleView(pageControlBackgroundColor cycleView:KVCycleView) -> UIColor{
+        return UIColor.clear
     }
     
 }
@@ -96,7 +101,6 @@ class KVCycleView: UIView ,UIScrollViewDelegate{
     }()
     fileprivate lazy var pageControl : UIPageControl! = {
         let pageControl = UIPageControl()
-        pageControl.backgroundColor = UIColor.orange
         return pageControl
     }()
     
@@ -139,7 +143,7 @@ class KVCycleView: UIView ,UIScrollViewDelegate{
         }
         
         pageControl.numberOfPages = delegate?.cycleView(index: self) ?? 0
-        
+        pageControl.backgroundColor = delegate?.cycleView(pageControlBackgroundColor: self)
         
         
     }
@@ -181,18 +185,17 @@ class KVCycleView: UIView ,UIScrollViewDelegate{
     }
     
     //imageView添加iamge方法
-    fileprivate func setModel(_ imageView:UIImageView,_ imageModel:imageModel) {
-        switch imageModel.type! {
-        case .url:
-            do {
-                let data = try Data(contentsOf: URL(string: imageModel.name!)!)
-                imageView.image = UIImage(data: data)
-            } catch let error {
-                print("error  " , error)
-            }
-        case .local:
-            imageView.image = UIImage(named: imageModel.name ?? "")
+    fileprivate func setModel(_ imageView:UIImageView,_ imageName:String?) {
+        
+        guard let name = imageName else {
+            return
         }
+        if isURL(name) {
+            imageView.kf.setImage(with: URL(string: name), placeholder: delegate?.cycleView(placeholder: self))
+        }else{
+            imageView.image = UIImage(named: name)
+        }
+        
     }
     
     //时间控制器方法
@@ -208,7 +211,7 @@ class KVCycleView: UIView ,UIScrollViewDelegate{
     fileprivate func deinitTimer() {
         if timer != nil {
             timer = nil
-            timer!.invalidate()
+            timer?.invalidate()
         }
     }
     
@@ -226,17 +229,23 @@ class KVCycleView: UIView ,UIScrollViewDelegate{
 
 extension KVCycleView {
     
+    //判断是否为URL
+    func isURL(_ str:String?) -> Bool {
+        let regex = "[a-zA-z]+://[^\\s]*"
+        let urlTest = NSPredicate(format: "SELF MATCHES %@", regex)
+        return urlTest.evaluate(with:str)
+    }
     
     //开始拖拽
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         
-        print("WillBeginDragging   ",self.currentImageView.frame)
+        //print("WillBeginDragging   ",self.currentImageView.frame)
         
         deinitTimer()
     }
     //停止拖拽
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("DidEndDragging   ",self.currentImageView.frame)
+        //print("DidEndDragging   ",self.currentImageView.frame)
         
         initTimer(5)
     }
@@ -244,7 +253,7 @@ extension KVCycleView {
     //滚动结束
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.x
-        debugPrint(offset)
+        //debugPrint(offset)
         
         if offset == 0 {
             self.indexOfCurrentImage = getLastIndex(indexOfCurrentImage)
