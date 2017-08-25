@@ -200,19 +200,25 @@ class KVCycleView: UIView ,UIScrollViewDelegate{
     
     //时间控制器方法
     @objc private func timerAction() {
+        
+//        let formatter = DateFormatter()
+//        formatter.timeZone = TimeZone.current
+//        formatter.dateFormat = "HH:mm:ss.SSS"
+//        print(formatter.string(from: Date()), "timeAction", terminator: "  ")
+//        
+        
         self.contentScrollView.setContentOffset(CGPoint(x: self.bounds.size.width * 2, y: 0), animated: true)
     }
     //初始化定时器
     fileprivate func initTimer(_ timeInterval: Double) {
+        
         timer = Timer.scheduledTimer(timeInterval:TimeInterval(delegate?.cycleView(timeInterval: self) ?? 2), target: self, selector: #selector(timerAction), userInfo:nil, repeats: true)
-        timer?.fireDate = Date(timeIntervalSinceNow: timeInterval)
+        //timer?.fireDate = Date(timeIntervalSinceNow: timeInterval)
     }
     //销毁定时器
     fileprivate func deinitTimer() {
-        if timer != nil {
-            timer = nil
-            timer?.invalidate()
-        }
+        timer = nil
+        timer?.invalidate()
     }
     
     deinit {
@@ -238,16 +244,11 @@ extension KVCycleView {
     
     //开始拖拽
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        
-        //print("WillBeginDragging   ",self.currentImageView.frame)
-        
-        deinitTimer()
+        timer?.fireDate = Date.distantFuture
     }
     //停止拖拽
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        //print("DidEndDragging   ",self.currentImageView.frame)
-        
-        initTimer(5)
+        timer?.fireDate = Date(timeIntervalSinceNow: 5)
     }
     
     //滚动结束
