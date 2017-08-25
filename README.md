@@ -9,12 +9,13 @@
 * ARC
 
 ## 使用方法
-
+```swift
 cycleView = KVCycleView(frame: self.view.bounds)
 
 cycleView.delegate = self
 
 self.view.addSubview(cycleView)
+```
 
 页面更新时执行 cycleView.reload() 即可
 
